@@ -1,6 +1,6 @@
-import { Meteor } from "meteor/meteor";
+//import { Meteor } from "meteor/meteor";
 
-const collections = [ Messages ];
+const collections = [ Messages, Walls ];
 
 Meteor.startup(() => {
 	console.log("SERVER started");
@@ -17,4 +17,27 @@ Meteor.startup(() => {
 			remove : deny,
 		});
 	}
+
+	if (!Walls.findOne({
+			id : "general"
+		})) {
+		Walls.insert({
+			id : "general",
+			lastActive : new Date(),
+		});
+	}
+});
+
+
+Meteor.methods({
+	saveMessage : function(text, wallId) {
+		const now = new Date();
+		Messages.insert({
+			text : text,
+			date : now,
+			wallId : wallId,
+			upvotes : 0,
+			flags : 0,
+		});
+	},
 });

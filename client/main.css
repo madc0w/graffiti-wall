@@ -35,7 +35,8 @@ body {
 }
 
 #add-button {
-	z-index: 100; box-shadow : 4px 4px 2px #aaa;
+	z-index: 100; 
+	box-shadow : 4px 4px 2px #aaa;
 	font-weight: bold;
 	font-size: 40px;
 	text-align: center;
@@ -61,6 +62,7 @@ body {
 }
 
 .container {
+	z-index: 100; 
 	display: none;
 	text-align: center;
 	background-color: #eee;
@@ -83,4 +85,15 @@ body {
 
 #add-post-input-container input {
 	width: 100%;
+}
+
+#toast {
+	z-index: 200;
+	background-color: #ddd;
+	border-radius: 4px;
+	width: 90%;
+	position: absolute;
+	top: calc(100vh - 80px);
+	padding: 8px;
+	font-weight: bold;
 }

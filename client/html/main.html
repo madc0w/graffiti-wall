@@ -10,16 +10,28 @@
 
 <template name="main">
 	<div id="main">
+		{{#each messages}}
+			<div class="message">{{this.text}}</div>
+		{{/each}}
+	
 		<div class="container" id="add-post-input-container">
 			<label for="add-post-input">{{_ "post_label"}}</label><br/>
-			<input id="add-post-input" type="text"/>
-			<div class="button" id="post-button">{{_ "post"}}</div>
+			<input id="add-post-input" type="text" maxlength="200"/>
+			{{#if isPostInProgress}}
+				<div><img src="spinner.gif"/></div>
+			{{else}}
+				<div class="button" id="post-button">{{_ "post"}}</div>
+			{{/if}}
 		</div>
 
 		<div class="container" id="add-options">
 			<div class="button" id="new-post-button">{{_ "new_post"}}</div>
 			<div class="button" id="new-wall-button">{{_ "new_wall"}}</div>
-		</div>	
+		</div>
+		{{#if toastText}}
+			<div id="toast">{{toastText}}</div>
+		{{/if}}
+			
 		<div id="add-button-container">
 			<div id="add-button">+</div>
 		</div>
