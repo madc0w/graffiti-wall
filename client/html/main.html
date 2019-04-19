@@ -1,0 +1,27 @@
+<head>
+	<title>Graffiti Wall</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+</head>
+
+<body>
+	{{> main}}
+</body>
+
+
+<template name="main">
+	<div id="main">
+		<div class="container" id="add-post-input-container">
+			<label for="add-post-input">{{_ "post_label"}}</label><br/>
+			<input id="add-post-input" type="text"/>
+			<div class="button" id="post-button">{{_ "post"}}</div>
+		</div>
+
+		<div class="container" id="add-options">
+			<div class="button" id="new-post-button">{{_ "new_post"}}</div>
+			<div class="button" id="new-wall-button">{{_ "new_wall"}}</div>
+		</div>	
+		<div id="add-button-container">
+			<div id="add-button">+</div>
+		</div>
+	</div>
+</template>

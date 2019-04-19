@@ -3,6 +3,30 @@ body {
 	font-family: Lato;
 }
 
+#main {
+	height: 95vh;
+}
+
+.button {
+	background-color: orange;
+	border-radius: 6px;
+	padding: 4px;
+	margin: 12px;
+	min-width: 100px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	border-width: 2px;
+	border-color: white;
+	border-style: solid;
+}
+
+.button:hover {
+	cursor: pointer;
+	color: black;
+	background-color: #acd;
+}
+
 #add-button-container {
 	margin-left: calc(50% - 20px);
 	position: absolute;
@@ -11,8 +35,7 @@ body {
 }
 
 #add-button {
-	z-index: 100;
-	box-shadow: 4px 4px 2px #aaa;
+	z-index: 100; box-shadow : 4px 4px 2px #aaa;
 	font-weight: bold;
 	font-size: 40px;
 	text-align: center;
@@ -23,6 +46,7 @@ body {
 	height: 40px;
 	width: 40px;
 	line-height: 36px;
+	box-shadow: 4px 4px 2px #aaa;
 }
 
 #add-button:hover {
@@ -30,4 +54,33 @@ body {
 	color: black;
 	background-color: #acd;
 }
-	
+
+#add-options {
+	left: calc(50% - 100px);
+	width: 200px;
+}
+
+.container {
+	display: none;
+	text-align: center;
+	background-color: #eee;
+	border-radius: 18px;
+	border-color: black;
+	border-width: 2px;
+	border-style: solid;
+	padding: 12px;
+	top: 40%;
+	position: absolute;
+	line-height: 42px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#add-post-input-container {
+	width: 300px;
+	left: calc(50% - 150px);
+}
+
+#add-post-input-container input {
+	width: 100%;
+}
