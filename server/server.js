@@ -33,7 +33,7 @@ Meteor.methods({
 	saveMessage : function(text, wallId) {
 		const now = new Date();
 		Messages.insert({
-			text : text,
+			text : text.trim(),
 			date : now,
 			wallId : wallId,
 			upvotes : 0,

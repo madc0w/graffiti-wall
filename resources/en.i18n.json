@@ -4,5 +4,6 @@
 	"post_label": "What do you want to say to the world?",
 	"post": "Post it!",
 	"post_success": "You have spoken to the world, and the world has heard you!",
-	"post_fail": "Something went wrong... Try again, maybe?"
+	"post_fail": "Something went wrong... Try again, maybe?",
+	"message_too_short": "Please enter a longer message than that."
 }

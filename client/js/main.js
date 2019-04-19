@@ -1,5 +1,7 @@
 //import { Template } from "meteor/templating";
 //import { ReactiveVar } from "meteor/reactive-var";
+const fadeDuration = 1200;
+const toastDuration = 4000;
 
 const isPostInProgress = new ReactiveVar(false);
 const toastText = new ReactiveVar();
@@ -45,31 +47,35 @@ Template.main.events({
 	"click #new-post-button" : function(e) {
 		$(".container").hide();
 
+		$("#add-post-input").val("");
 		$("#add-post-input-container").show("explode", {
 			pieces : 64
 		});
 	},
 
 	"click #post-button" : function(e) {
-		isPostInProgress.set(true);
 		const text = $("#add-post-input").val();
-		Meteor.call("saveMessage", text, wallId.get(), function(err, result) {
-			toast(err ? "post_fail" : "post_success");
-			$(".container").hide();
-			isPostInProgress.set(false);
-		});
+		if (text.length < 4) {
+			toast("message_too_short");
+		} else {
+			isPostInProgress.set(true);
+			Meteor.call("saveMessage", text, wallId.get(), function(err, result) {
+				toast(err ? "post_fail" : "post_success");
+				$(".container").hide();
+				isPostInProgress.set(false);
+			});
+		}
 	},
 });
 
 function toast(textKey) {
 	toastText.set(TAPi18n.__(textKey));
-	const toastDuration = 6000;
 	Meteor.setTimeout(function() {
-		$("#toast").fadeOut(toastDuration - 2000);
-	}, 0);
+		Meteor.setTimeout(function() {
+			$("#toast").fadeOut(fadeDuration);
+		}, 0);
+	}, toastDuration - fadeDuration);
 	Meteor.setTimeout(function() {
 		toastText.set(null);
 	}, toastDuration);
 }
-
-_toast = toast;
