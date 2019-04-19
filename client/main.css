@@ -1,4 +1,33 @@
 body {
-	padding: 10px;
+	padding: 4px;
 	font-family: Lato;
 }
+
+#add-button-container {
+	margin-left: calc(50% - 20px);
+	position: absolute;
+	height: 40px;
+	top: calc(100vh - 50px);
+}
+
+#add-button {
+	z-index: 100;
+	box-shadow: 4px 4px 2px #aaa;
+	font-weight: bold;
+	font-size: 40px;
+	text-align: center;
+	color: white;
+	border-radius: 100px;
+	background-color: #44f;
+	border-style: none;
+	height: 40px;
+	width: 40px;
+	line-height: 36px;
+}
+
+#add-button:hover {
+	cursor: pointer;
+	color: black;
+	background-color: #acd;
+}
+	
