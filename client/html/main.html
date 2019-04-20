@@ -10,10 +10,19 @@
 
 <template name="main">
 	<div id="main">
-		<div id="wall-title">{{wall.id}}</div>
-		{{#each messages}}
-			{{> message}}
-		{{/each}}
+		<div id="find-wall" class="button">{{_ "find_another_wall"}}</div>
+		<div id="wall-title">
+			{{wallId}}
+		</div>
+		{{#if messages.length}}
+			{{#each messages}}
+				{{> message}}
+			{{/each}}
+		{{else}}
+			<div id="no-posts">
+				{{{_ "no_messages"}}}
+			</div>
+		{{/if}}
 	
 		<div class="container" id="add-post-input-container">
 			<label for="add-post-input">{{_ "post_label"}}</label><br/>
@@ -37,6 +46,27 @@
 				<div><img src="spinner.gif"/></div>
 			{{else}}
 				<div class="button" id="post-button">{{_ "post"}}</div>
+			{{/if}}
+		</div>
+
+		<div class="container" id="new-wall-input-container">
+			{{_ "new_wall_name"}} : <input type="text" id="wall-id-input" maxlength="30"/>
+			{{#if isWallCreationInProgress}}
+				<div><img src="spinner.gif"/></div>
+			{{else}}
+				<div id="create-wall-button" class="button">{{_ "create_wall"}}</div>
+			{{/if}}
+		</div> 
+
+		<div class="container" id="search-walls-input-container">
+			{{_ "wall_name"}} : 
+			<input type="text" id="wall-id-search-input" maxlength="30"/>
+			{{#if wallIdCompletions.length}}
+				<div id="search-walls-results">
+					{{#each wallIdCompletions}}
+						<div class="search-walls-result">{{this}}</div>
+					{{/each}}
+				</div>
 			{{/if}}
 		</div>
 

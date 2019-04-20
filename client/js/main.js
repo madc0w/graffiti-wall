@@ -8,7 +8,9 @@ const flightTimeVariation = 3000;
 const numMessages = 2;
 
 const isPostInProgress = new ReactiveVar(false);
+const isWallCreationInProgress = new ReactiveVar(false);
 const toastText = new ReactiveVar();
+const wallIdCompletions = new ReactiveVar([]);
 const messages = new ReactiveVar({});
 const emojiFilter = new ReactiveVar();
 
@@ -32,11 +34,8 @@ Template.main.helpers({
 		return emoji.emojify(":smiley:");
 	},
 
-	wall : function() {
-		const wall = Walls.findOne({
-			id : wallId.get()
-		});
-		return wall;
+	wallId : function() {
+		return wallId.get();
 	},
 
 	messages : function() {
@@ -47,8 +46,16 @@ Template.main.helpers({
 		return isPostInProgress.get();
 	},
 
+	isWallCreationInProgress : function() {
+		return isWallCreationInProgress.get();
+	},
+
 	toastText : function() {
 		return toastText.get();
+	},
+
+	wallIdCompletions : function() {
+		return wallIdCompletions.get();
 	},
 });
 
@@ -125,6 +132,55 @@ Template.main.events({
 	"keyup #emoji-search-input" : function(e) {
 		emojiFilter.set($("#emoji-search-input").val().trim());
 	},
+
+	"click #new-wall-button" : function(e) {
+		$(".container").hide();
+
+		$("#wall-id-input").val("");
+		$("#new-wall-input-container").show("explode", {
+			pieces : 64
+		});
+	},
+
+	"click #create-wall-button" : function(e) {
+		const _wallId = $("#wall-id-input").val();
+		if (_wallId.length < 4) {
+			toast("wall_name_too_short");
+		} else {
+			isWallCreationInProgress.set(true);
+			Meteor.call("createWall", _wallId, function(err, result) {
+				isWallCreationInProgress.set(false);
+				if (err) {
+					toast("wall_create_fail");
+				} else if (result == "existing") {
+					toast("wall_create_existing");
+				} else {
+					toast("wall_create_success");
+					wallId.set(_wallId);
+					$(".container").hide();
+				}
+			});
+		}
+	},
+
+	"click #find-wall" : function(e) {
+		$(".container").hide();
+		$("#wall-id-search-input").val("");
+		$("#search-walls-input-container").show("explode", {
+			pieces : 64
+		});
+	},
+
+	"keyup #wall-id-search-input" : function(e) {
+		Meteor.call("findWalls", e.target.value, function(err, result) {
+			wallIdCompletions.set(result);
+		});
+	},
+
+	"click .search-walls-result" : function(e) {
+		$(".container").hide();
+		wallId.set(this);
+	},
 });
 
 Template.main.onCreated(function() {
@@ -143,8 +199,22 @@ Template.main.onCreated(function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+const pausedMessages = {};
+
 Template.message.helpers({
 	emojify : emojify,
+});
+
+Template.message.events({
+	"click .message" : function(e) {
+		if (pausedMessages[e.target.id]) {
+			$(e.target).resume();
+			delete pausedMessages[e.target.id];
+		} else {
+			$(e.target).pause();
+			pausedMessages[e.target.id] = true;
+		}
+	},
 });
 
 Template.message.onRendered(function() {

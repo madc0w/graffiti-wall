@@ -122,6 +122,7 @@ body {
 	font-size: 24px;
 	width: 200px;
 	border-radius: 22px;
+	overflow-wrap: break-word;
 }
 
 #emojis {
@@ -157,4 +158,45 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto;
 	margin-bottom: 40px;
+}
+
+#no-posts {
+	position: absolute;
+	top: 120px;
+	left: calc(50% - 150px);
+	width: 300px;
+	background-color: rgba(100, 200, 255, 0.6);
+	padding: 32px;
+	border-radius: 20px;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 42px;
+	text-align: center;
+}
+
+#new-wall-input-container {
+	width: 300px;
+	left: calc(50% - 150px);
+}
+
+#find-wall {
+	display: inline-block;
+	max-width: 160px;
+	font-size: 16px;
+	position: absolute;
+}
+
+#search-walls-input-container {
+	width: 300px;
+	left: calc(50% - 150px);
+}
+
+#search-walls-results {
+	height: 250px;
+	overflow-y: auto;
+}
+
+.search-walls-result:hover {
+	cursor: pointer;
+	background-color: #acd;
 }

@@ -1,11 +1,21 @@
 {
-	"new_post": "New Post",
-	"new_wall": "New Wall",
+	"new_post": "Post something",
+	"new_wall": "Create your own Wall",
 	"post_label": "What do you want to say to the world?",
 	"post": "Post it!",
 	"post_success": "You have spoken to the world, and the world has heard you!",
 	"post_fail": "Something went wrong... Try again, maybe?",
 	"message_too_short": "Please enter a longer message than that.",
 	"search_emojis": "Search emojis",
-	"no_matches": "No matches found"
+	"no_matches": "No matches found",
+	"new_wall_name": "Name your Wall",
+	"create_wall": "Create Wall!",
+	"no_messages": "Nothing to see here... yet.<br/>Be the first to post something!",
+	"wall_name_too_short": "Please enter a longer name for your wall.",
+	"wall_create_fail": "Something went wrong... Try again, maybe?",
+	"wall_create_success": "Wall created!  Now, say something intelligent.",
+	"wall_create_existing": "That name is already taken.  Try something else.",
+	"wall": "This Wall",
+	"find_another_wall": "Find another wall",
+	"wall_name" : "Search for a Wall named"
 }

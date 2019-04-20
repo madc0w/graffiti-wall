@@ -39,5 +39,50 @@ Meteor.methods({
 			upvotes : 0,
 			flags : 0,
 		});
+		Walls.update({
+			id : wallId
+		}, {
+			$set : {
+				lastActive : now,
+			}
+		});
+	},
+
+	createWall : function(wallId) {
+		wallId = wallId.trim();
+		const now = new Date();
+		if (Walls.findOne({
+				id : wallId
+			})) {
+			return "existing";
+		} else {
+			Walls.insert({
+				id : wallId,
+				creationDate : now,
+				lastActive : now,
+			});
+			return null;
+		}
+	},
+
+	findWalls : function(wallIdPart) {
+		const wallIds = [];
+		if (wallIdPart.length > 0) {
+			Walls.find({
+				id : {
+					$regex : wallIdPart.toLowerCase()
+				}
+			}, {
+				sort : {
+					lastActive : -1
+				},
+				fields : {
+					id : true
+				}
+			}).forEach(function(wall) {
+				wallIds.push(wall.id);
+			});
+		}
+		return wallIds;
 	},
 });
