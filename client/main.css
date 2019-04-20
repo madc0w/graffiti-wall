@@ -85,12 +85,13 @@ body {
 }
 
 #add-post-input-container {
-	width: 300px;
+	width: 400px;
 	left: calc(50% - 150px);
 }
 
 #add-post-input-container input {
-	width: 100%;
+	font-size: 22px;
+	width: calc(100% - 80px);
 }
 
 #toast {
@@ -120,4 +121,25 @@ body {
 	font-size: 24px;
 	width: 200px;
 	border-radius: 22px;
+}
+
+#emojis {
+	display: none;
+	width: 400px;
+	height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 300;
+}
+
+.emoji-selection {
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 4px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.emoji-selection:hover {
+	background-color: #acd;
 }

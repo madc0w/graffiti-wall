@@ -18,6 +18,12 @@
 		<div class="container" id="add-post-input-container">
 			<label for="add-post-input">{{_ "post_label"}}</label><br/>
 			<input id="add-post-input" type="text" maxlength="200"/>
+			<span id="emoji-button" class="button">{{smiley}}</span>
+			<div id="emojis">
+				{{#each emojis}}
+					<div class="emoji-selection">{{this.emoji}}</div>
+				{{/each}}
+			</div>
 			{{#if isPostInProgress}}
 				<div><img src="spinner.gif"/></div>
 			{{else}}
@@ -40,5 +46,5 @@
 </template>
 
 <template name="message">
-	<div class="message" id="{{this._id}}">{{this.text}}</div>
+	<div class="message" id="{{this._id}}">{{emojify this.text}}</div>
 </template>
