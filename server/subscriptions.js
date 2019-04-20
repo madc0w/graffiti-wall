@@ -4,3 +4,10 @@ Meteor.publish("messages", function(wallId) {
 		wallId : wallId
 	});
 });
+
+Meteor.publish("wall", function(wallId) {
+	//	this.unblock();
+	return Walls.find({
+		id : wallId
+	});
+});

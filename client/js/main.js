@@ -7,6 +7,13 @@ const isPostInProgress = new ReactiveVar(false);
 const toastText = new ReactiveVar();
 
 Template.main.helpers({
+	wall : function() {
+		const wall = Walls.findOne({
+			id : wallId.get()
+		});
+		return wall;
+	},
+
 	messages : function() {
 		return Messages.find({
 			wallId : wallId.get()
@@ -66,6 +73,44 @@ Template.main.events({
 			});
 		}
 	},
+});
+
+Template.message.onRendered(function() {
+	const element = $("#" + this.data._id);
+	const init = {};
+	const final = {};
+	if (Math.random() < 0.5) {
+		init.y = Math.random() * innerHeight;
+		final.y = Math.random() * innerHeight;
+		const edge = -element.width() - 40;
+		if (Math.random() < 0.5) {
+			init.x = edge;
+			final.x = innerWidth;
+		} else {
+			init.x = innerWidth;
+			final.x = edge;
+		}
+	} else {
+		init.x = Math.random() * innerWidth;
+		final.x = Math.random() * innerWidth;
+		const edge = -element.height() - 40;
+		if (Math.random() < 0.5) {
+			init.y = edge;
+			final.y = innerHeight;
+		} else {
+			init.y = innerHeight;
+			final.y = edge;
+		}
+
+	}
+	element.offset({
+		left : init.x,
+		top : init.y
+	});
+	element.animate({
+		left : final.x + "px",
+		top : final.y + "px"
+	}, 8000);
 });
 
 function toast(textKey) {

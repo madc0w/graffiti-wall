@@ -1,10 +1,16 @@
+html {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
 body {
-	padding: 4px;
+	padding: 0px;
 	font-family: Lato;
 }
 
 #main {
-	height: 95vh;
+	height: 98vh;
+	background-image: url(wall.jpg);
 }
 
 .button {
@@ -31,22 +37,22 @@ body {
 	margin-left: calc(50% - 20px);
 	position: absolute;
 	height: 40px;
-	top: calc(100vh - 50px);
+	top: calc(100vh - 84px);
 }
 
 #add-button {
-	z-index: 100; 
-	box-shadow : 4px 4px 2px #aaa;
+	z-index: 100;
+	box-shadow: 4px 4px 2px #aaa;
 	font-weight: bold;
-	font-size: 40px;
+	font-size: 60px;
 	text-align: center;
 	color: white;
 	border-radius: 100px;
-	background-color: #44f;
+	background-color: orange;
 	border-style: none;
-	height: 40px;
-	width: 40px;
-	line-height: 36px;
+	height: 60px;
+	width: 60px;
+	line-height: 56px;
 	box-shadow: 4px 4px 2px #aaa;
 }
 
@@ -62,7 +68,7 @@ body {
 }
 
 .container {
-	z-index: 100; 
+	z-index: 100;
 	display: none;
 	text-align: center;
 	background-color: #eee;
@@ -96,4 +102,22 @@ body {
 	top: calc(100vh - 80px);
 	padding: 8px;
 	font-weight: bold;
+}
+
+#wall-title {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 22px;
+	background-color: rgba(100, 100, 100, 0.3);
+	padding-bottom: 4px;
+}
+
+.message {
+	position: absolute;
+	background-color: rgba(100, 200, 255, 0.6);
+	padding: 18px;
+	font-size: 24px;
+	width: 200px;
+	border-radius: 22px;
 }

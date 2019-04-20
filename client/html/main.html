@@ -10,8 +10,9 @@
 
 <template name="main">
 	<div id="main">
+		<div id="wall-title">{{wall.id}}</div>
 		{{#each messages}}
-			<div class="message">{{this.text}}</div>
+			{{> message}}
 		{{/each}}
 	
 		<div class="container" id="add-post-input-container">
@@ -36,4 +37,8 @@
 			<div id="add-button">+</div>
 		</div>
 	</div>
+</template>
+
+<template name="message">
+	<div class="message" id="{{this._id}}">{{this.text}}</div>
 </template>
