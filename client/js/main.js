@@ -2,6 +2,7 @@
 //import { ReactiveVar } from "meteor/reactive-var";
 const fadeDuration = 1200;
 const toastDuration = 4000;
+const flightTime = 12000;
 
 const isPostInProgress = new ReactiveVar(false);
 const toastText = new ReactiveVar();
@@ -101,7 +102,6 @@ Template.message.onRendered(function() {
 			init.y = innerHeight;
 			final.y = edge;
 		}
-
 	}
 	element.offset({
 		left : init.x,
@@ -110,7 +110,9 @@ Template.message.onRendered(function() {
 	element.animate({
 		left : final.x + "px",
 		top : final.y + "px"
-	}, 8000);
+	}, flightTime, null, function() {
+		element.remove();
+	});
 });
 
 function toast(textKey) {
