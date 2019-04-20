@@ -5,5 +5,7 @@
 	"post": "Post it!",
 	"post_success": "You have spoken to the world, and the world has heard you!",
 	"post_fail": "Something went wrong... Try again, maybe?",
-	"message_too_short": "Please enter a longer message than that."
+	"message_too_short": "Please enter a longer message than that.",
+	"search_emojis": "Search emojis",
+	"no_matches": "No matches found"
 }

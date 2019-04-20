@@ -10,10 +10,22 @@ const numMessages = 2;
 const isPostInProgress = new ReactiveVar(false);
 const toastText = new ReactiveVar();
 const messages = new ReactiveVar({});
+const emojiFilter = new ReactiveVar();
 
 Template.main.helpers({
 	emojis : function() {
-		return emojis.get();
+		const _emojiFilter = emojiFilter.get() && emojiFilter.get().toLowerCase();
+		const _emojis = emojis.get();
+		if (_emojiFilter && _emojiFilter.length > 0) {
+			const filtered = [];
+			for (var _emoji of _emojis) {
+				if (_emoji.key.indexOf(_emojiFilter) != -1) {
+					filtered.push(_emoji);
+				} // 
+			}
+			return filtered;
+		}
+		return _emojis;
 	},
 
 	smiley : function() {
@@ -63,6 +75,9 @@ Template.main.events({
 	},
 
 	"click #new-post-button" : function(e) {
+		emojiFilter.set(null);
+		$("#emoji-search-input").val("");
+		$("#emojis").hide();
 		$(".container").hide();
 
 		$("#add-post-input").val("");
@@ -105,6 +120,10 @@ Template.main.events({
 		const newText = text.substring(0, cursorPos) + emoji.get(this.key) + text.substring(cursorPos);
 		$("#add-post-input").val(newText);
 		setCaretPosition(el, cursorPos + 1);
+	},
+
+	"keyup #emoji-search-input" : function(e) {
+		emojiFilter.set($("#emoji-search-input").val().trim());
 	},
 });
 

@@ -86,10 +86,11 @@ body {
 
 #add-post-input-container {
 	width: 400px;
-	left: calc(50% - 150px);
+	left: calc(50% - 200px);
+	top: 12%;
 }
 
-#add-post-input-container input {
+#add-post-input {
 	font-size: 22px;
 	width: calc(100% - 80px);
 }
@@ -125,10 +126,6 @@ body {
 
 #emojis {
 	display: none;
-	width: 400px;
-	height: 400px;
-	overflow-x: hidden;
-	overflow-y: auto;
 	z-index: 300;
 }
 
@@ -142,4 +139,22 @@ body {
 
 .emoji-selection:hover {
 	background-color: #acd;
+}
+
+#emoji-search-input {
+	width: 100px;
+}
+
+#emoji-search-container {
+	position: fixed;
+}
+
+#emojis-container {
+	position: relative;
+	top: 36px;
+	width: 400px;
+	height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin-bottom: 40px;
 }
