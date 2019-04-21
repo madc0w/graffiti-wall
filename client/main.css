@@ -184,6 +184,7 @@ body {
 	max-width: 160px;
 	font-size: 16px;
 	position: absolute;
+	margin-top: 4px;
 }
 
 #search-walls-input-container {
