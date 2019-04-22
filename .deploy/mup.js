@@ -25,7 +25,7 @@ module.exports = {
 			// If you are using ssl, it needs to start with https://
 			ROOT_URL : "http://104.248.87.137",
 			MONGO_URL : "mongodb://wallator:blimey@mongodb-1650-0.cloudclusters.net:10005/wallator?authSource=admin",
-			MONGO_OPLOG_URL : "mongodb://oplog_wallator:blimey@mongodb-1650-0.cloudclusters.net:10005/wallator?authSource=admin",
+		//			MONGO_OPLOG_URL : "mongodb://oplog_wallator:blimey@mongodb-1650-0.cloudclusters.net:10005/wallator?authSource=admin",
 		},
 
 		docker : {
