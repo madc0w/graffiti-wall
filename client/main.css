@@ -206,8 +206,11 @@ body {
 
 .message-info img {
 	height: 32px;
-	cursor: pointer;
 	border-radius: 6px;	
+}
+
+.message-info img.active {
+	cursor: pointer;
 }
 
 .message-info img.active:hover {
