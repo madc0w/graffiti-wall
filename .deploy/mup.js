@@ -38,12 +38,12 @@ module.exports = {
 		enableUploadProgressBar : true
 	},
 
-	mongo : {
-		version : "3.4.1",
-		servers : {
-			one : {}
-		}
-	},
+//	mongo : {
+//		version : "3.4.1",
+//		servers : {
+//			one : {}
+//		}
+//	},
 
 	// (Optional)
 	// Use the proxy to setup ssl or to route requests to the correct
