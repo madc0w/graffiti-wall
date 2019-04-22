@@ -3,5 +3,7 @@
 cd /home/mad/git/graffiti-wall/.deploy
 
 git pull
-sudo -i mup setup
-sudo -i mup deploy
+
+# must run as root!
+mup setup
+mup deploy
