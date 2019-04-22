@@ -4,15 +4,15 @@ module.exports = {
 			// TODO: set host address, username, and authentication method
 			host : "104.248.87.137",
 			username : "root",
-			pem : "/Users/hifi/.ssh/id_rsa",
-		// password: "server-password"
+			pem : "~/.ssh/id_rsa",
+//		 password: ""
 		// or neither for authenticate from ssh-agent
 		}
 	},
 
 	app : {
 		// TODO: change app name and path
-		name : "app",
+		name : "wallator",
 		path : "../",
 
 		servers : {
