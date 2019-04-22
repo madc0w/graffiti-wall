@@ -14,6 +14,9 @@ const toastText = new ReactiveVar();
 const wallIdCompletions = new ReactiveVar([]);
 const messages = new ReactiveVar({});
 const emojiFilter = new ReactiveVar();
+const pausedMessages = new ReactiveVar({});
+const updateUpvote = new ReactiveVar();
+
 
 Template.main.helpers({
 	emojis : function() {
@@ -209,21 +212,49 @@ Template.main.onCreated(function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-const pausedMessages = {};
-
 Template.message.helpers({
 	emojify : emojify,
+
+	isPaused : function() {
+		return pausedMessages.get()[this._id];
+	},
+
+	isLiked : function() {
+		updateUpvote.get();
+		return localStorage.getItem(this._id);
+	},
+
+	numUpvotes : function() {
+		const message = Messages.findOne({
+			_id : this._id
+		});
+		return message && message.upvotes ? message.upvotes.length : 0;
+	},
 });
 
 Template.message.events({
+	"click .upvote-icon" : function(e) {
+		localStorage.setItem(this._id, true);
+		updateUpvote.set(new Date());
+		Meteor.call("upvote", this._id, function(err, result) {
+			if (err) {
+				toast("upvote_fail");
+			} else {
+				toast("upvote_success");
+			}
+		});
+	},
+
 	"click .message" : function(e) {
-		if (pausedMessages[e.target.id]) {
+		const _pausedMessages = pausedMessages.get();
+		if (_pausedMessages[e.target.id]) {
 			$(e.target).resume();
-			delete pausedMessages[e.target.id];
+			delete _pausedMessages[e.target.id];
 		} else {
 			$(e.target).pause();
-			pausedMessages[e.target.id] = true;
+			_pausedMessages[e.target.id] = true;
 		}
+		pausedMessages.set(_pausedMessages);
 	},
 });
 

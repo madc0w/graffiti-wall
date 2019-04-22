@@ -36,7 +36,7 @@ Meteor.methods({
 			text : text.trim(),
 			date : now,
 			wallId : wallId,
-			upvotes : 0,
+			upvotes : [],
 			flags : 0,
 		});
 		Walls.update({
@@ -84,5 +84,29 @@ Meteor.methods({
 			});
 		}
 		return wallIds;
+	},
+
+	upvote : function(id) {
+		const message = Messages.findOne({
+			_id : id
+		});
+		//		console.log("id", id);
+		//		console.log("message", message);
+		if (message) {
+			const upvotes = message.upvotes;
+			upvotes.push({
+				date : new Date()
+			});
+			Messages.update({
+				_id : id
+			}, {
+				$set : {
+					upvotes : upvotes
+				}
+			});
+			return upvotes.length;
+		} else {
+			throw new Meteor.Error("upvote failed.  id: ", id);
+		}
 	},
 });

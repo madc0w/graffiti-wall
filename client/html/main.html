@@ -87,5 +87,17 @@
 </template>
 
 <template name="message">
-	<div class="message" id="{{this._id}}">{{emojify this.text}}</div>
+	<div class="message" id="{{this._id}}">
+		<div class="message-info">
+			{{#if isPaused}}
+				{{#if isLiked}}
+					<img class="upvote-icon" src="heart-icon-gray.png"/>
+					{{numUpvotes}}
+				{{else}}
+					<img class="upvote-icon active" src="heart-icon.png"/>
+				{{/if}}
+			{{/if}}
+		</div>
+		{{emojify this.text}}
+	</div>
 </template>

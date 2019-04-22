@@ -197,3 +197,19 @@ body {
 	cursor: pointer;
 	background-color: #acd;
 }
+
+.message-info {
+	float: right;
+	width: 32px;
+	font-size: 12px;
+}
+
+.message-info img {
+	height: 32px;
+	cursor: pointer;
+	border-radius: 6px;	
+}
+
+.message-info img.active:hover {
+	background-color: #8ac;
+}
