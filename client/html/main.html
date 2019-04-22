@@ -28,20 +28,22 @@
 			<label for="add-post-input">{{_ "post_label"}}</label><br/>
 			<input id="add-post-input" type="text" maxlength="200"/>
 			<span id="emoji-button" class="button">{{smiley}}</span>
-			<div id="emojis">
-				<div id="emoji-search-container">
-					{{_ "search_emojis"}} : <input type="text" id="emoji-search-input"/>
+			{{#if isDisplayEmojis}}
+				<div id="emojis">
+					<div id="emoji-search-container">
+						{{_ "search_emojis"}} : <input type="text" id="emoji-search-input"/>
+					</div>
+					<div id="emojis-container">
+						{{#if emojis.length}}
+							{{#each emojis}}
+								<div class="emoji-selection">{{this.emoji}}</div>
+							{{/each}}
+						{{else}}
+							{{_ "no_matches"}}
+						{{/if}}
+					</div>
 				</div>
-				<div id="emojis-container">
-					{{#if emojis.length}}
-						{{#each emojis}}
-							<div class="emoji-selection">{{this.emoji}}</div>
-						{{/each}}
-					{{else}}
-						{{_ "no_matches"}}
-					{{/if}}
-				</div>
-			</div>
+			{{/if}}
 			{{#if isPostInProgress}}
 				<div><img src="spinner.gif"/></div>
 			{{else}}

@@ -116,6 +116,7 @@ body {
 }
 
 .message {
+	text-align: center;
 	position: absolute;
 	background-color: rgba(100, 200, 255, 0.6);
 	padding: 18px;
@@ -123,11 +124,6 @@ body {
 	width: 200px;
 	border-radius: 22px;
 	overflow-wrap: break-word;
-}
-
-#emojis {
-	display: none;
-	z-index: 300;
 }
 
 .emoji-selection {

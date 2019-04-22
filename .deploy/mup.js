@@ -1,17 +1,15 @@
 module.exports = {
 	servers : {
 		one : {
-			// TODO: set host address, username, and authentication method
 			host : "104.248.87.137",
 			username : "root",
 			pem : "~/.ssh/id_rsa",
-//		 password: ""
+		//		 password: ""
 		// or neither for authenticate from ssh-agent
 		}
 	},
 
 	app : {
-		// TODO: change app name and path
 		name : "wallator",
 		path : "../",
 
@@ -24,11 +22,10 @@ module.exports = {
 		},
 
 		env : {
-			// TODO: Change to your app's url
 			// If you are using ssl, it needs to start with https://
 			ROOT_URL : "http://104.248.87.137",
-		//			MONGO_URL : "mongodb://mongodb/meteor",
-		//			MONGO_OPLOG_URL : "mongodb://mongodb/local",
+			MONGO_URL : "mongodb://wallator:blimey@mongodb-1650-0.cloudclusters.net:10005/wallator?authSource=admin",
+			MONGO_OPLOG_URL : "mongodb://oplog_wallator:blimey@mongodb-1650-0.cloudclusters.net:10005/wallator?authSource=admin",
 		},
 
 		docker : {

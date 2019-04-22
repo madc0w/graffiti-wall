@@ -5,10 +5,11 @@ const fadeDuration = 1200;
 const toastDuration = 4000;
 const flightTime = 12000;
 const flightTimeVariation = 3000;
-const numMessages = 2;
+const numMessages = 3;
 
 const isPostInProgress = new ReactiveVar(false);
 const isWallCreationInProgress = new ReactiveVar(false);
+const isDisplayEmojis = new ReactiveVar(false);
 const toastText = new ReactiveVar();
 const wallIdCompletions = new ReactiveVar([]);
 const messages = new ReactiveVar({});
@@ -50,6 +51,10 @@ Template.main.helpers({
 		return isWallCreationInProgress.get();
 	},
 
+	isDisplayEmojis : function() {
+		return isDisplayEmojis.get();
+	},
+
 	toastText : function() {
 		return toastText.get();
 	},
@@ -62,9 +67,14 @@ Template.main.helpers({
 Template.main.events({
 	"click #main" : function(e) {
 		if (e.target.className != "button" && e.target.id != "add-button" && $(e.target).parents(".container").length == 0) {
-			$(".container").hide("explode", {
-				pieces : 64
-			});
+			if (isDisplayEmojis.get()) {
+				$(".container").hide();
+			} else {
+				$(".container").hide("explode", {
+					pieces : 64
+				});
+			}
+			isDisplayEmojis.set(false);
 		}
 	},
 
@@ -84,7 +94,7 @@ Template.main.events({
 	"click #new-post-button" : function(e) {
 		emojiFilter.set(null);
 		$("#emoji-search-input").val("");
-		$("#emojis").hide();
+		isDisplayEmojis.set(false);
 		$(".container").hide();
 
 		$("#add-post-input").val("");
@@ -117,7 +127,7 @@ Template.main.events({
 	},
 
 	"click #emoji-button" : function(e) {
-		$("#emojis").toggle();
+		isDisplayEmojis.set(!isDisplayEmojis.get());
 	},
 
 	"click .emoji-selection" : function(e) {
@@ -193,7 +203,7 @@ Template.main.onCreated(function() {
 				messages.set(_messages);
 			}
 		}
-	}, 400);
+	}, 200);
 });
 
 
