@@ -2,7 +2,7 @@
 
 git pull
 
-rm -r ~/analogizer-build/
+rm -r ~/wallator-build/
 
 meteor build --verbose ~/wallator-build --server=http://www.wallator.com
 
