@@ -37,7 +37,13 @@ body {
 	margin-left: calc(50% - 20px);
 	position: absolute;
 	height: 40px;
-	top: calc(100vh - 84px);
+	top: calc(100% - 84px);
+}
+
+@media only screen and (max-width: 400px) {
+	#add-button-container {
+		margin-left: calc(50% - 35px);
+	}
 }
 
 #add-button {
@@ -92,6 +98,14 @@ body {
 	width: 400px;
 	left: calc(50% - 200px);
 	top: 12%;
+}
+
+@media only screen and (max-width: 400px) {
+	#add-post-input-container {
+		width: 280px;
+		left: calc(50% - 155px);
+		top: 12%;
+	}
 }
 
 #add-post-input {
@@ -153,7 +167,7 @@ body {
 #emojis-container {
 	position: relative;
 	top: 36px;
-	width: 400px;
+	width: 100%;
 	height: 400px;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -174,6 +188,13 @@ body {
 	text-align: center;
 }
 
+@media only screen and (max-width: 400px) {
+	#no-posts {
+		left: calc(50% - 140px);
+		width: 220px;
+	}
+}
+
 #new-wall-input-container {
 	width: 300px;
 	left: calc(50% - 150px);
@@ -184,12 +205,18 @@ body {
 	max-width: 160px;
 	font-size: 16px;
 	position: absolute;
-	margin-top: 4px;
+	margin-top: 36px;
 }
 
 #search-walls-input-container {
 	width: 300px;
 	left: calc(50% - 150px);
+}
+
+@media only screen and (max-width: 400px) {
+	#search-walls-input-container {
+		left: calc(50% - 165px);
+	}
 }
 
 #search-walls-results {
@@ -231,3 +258,10 @@ body {
 #color-wheel {
 	margin-left: 90px;
 }
+
+@media only screen and (max-width: 400px) {
+	#color-wheel {
+		margin-left: 40px;
+	}
+}
+
