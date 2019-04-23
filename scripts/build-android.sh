@@ -4,6 +4,7 @@ git pull
 
 rm -r ~/wallator-build/
 
+export METEOR_ALLOW_SUPERUSER=true
 meteor build --verbose ~/wallator-build --server=http://www.wallator.com
 
 cd ~/wallator-build/android/project/build/outputs/apk/release
