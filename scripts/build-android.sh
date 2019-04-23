@@ -2,7 +2,7 @@
 
 git pull
 
-rm -r ~/wallator-build/
+meteor reset
 
 export METEOR_ALLOW_SUPERUSER=true
 meteor build --verbose ~/wallator-build --server=http://www.wallator.com
