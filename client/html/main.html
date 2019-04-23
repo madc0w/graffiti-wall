@@ -28,6 +28,7 @@
 			<label for="add-post-input">{{_ "post_label"}}</label><br/>
 			<input id="add-post-input" type="text" maxlength="200"/>
 			<span id="emoji-button" class="button">{{smiley}}</span>
+			<span id="color-button" class="button"><img src="color_wheel_dock_icon.png"/></span>
 			{{#if isDisplayEmojis}}
 				<div id="emojis">
 					<div id="emoji-search-container">
@@ -43,6 +44,10 @@
 						{{/if}}
 					</div>
 				</div>
+			{{/if}}
+			{{#if isDisplayColorPicker}}
+				<div id="color-picker-title">{{_ "choose_message_color"}}</div>
+				<div class="wheel" id="color-wheel"></div>
 			{{/if}}
 			{{#if isPostInProgress}}
 				<div><img src="spinner.gif"/></div>
@@ -98,6 +103,8 @@
 				{{/if}}
 			{{/if}}
 		</div>
-		{{emojify this.text}}
+		<div class="message-text" style="color: {{#if this.color}}rgba({{this.color.r}}, {{this.color.g}}, {{this.color.b}}, 1){{else}}black{{/if}};">
+			{{emojify this.text}}
+		</div>
 	</div>
 </template>

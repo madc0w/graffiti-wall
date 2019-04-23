@@ -30,14 +30,15 @@ Meteor.startup(() => {
 
 
 Meteor.methods({
-	saveMessage : function(text, wallId) {
+	saveMessage : function(text, color, wallId) {
 		const now = new Date();
 		Messages.insert({
 			text : text.trim(),
+			color : color,
 			date : now,
 			wallId : wallId,
 			upvotes : [],
-			flags : 0,
+			flags : [],
 		});
 		Walls.update({
 			id : wallId

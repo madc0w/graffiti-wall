@@ -19,5 +19,6 @@
 	"find_another_wall": "Find another Wall",
 	"wall_name": "Search for a Wall named",
 	"upvote_fail": "Well that didn't work out.  Try again?",
-	"upvote_success": "Thanks for the love!"
+	"upvote_success": "Thanks for the love!",
+	"choose_message_color": "Choose a color for your message"
 }

@@ -9,6 +9,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.4.3",
+		"@jaames/iro": "^4.3.3",
 		"meteor-node-stubs": "^0.4.1",
 		"node-emoji": "^1.10.0"
 	}

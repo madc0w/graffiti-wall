@@ -17,7 +17,7 @@ body {
 	background-color: orange;
 	border-radius: 6px;
 	padding: 4px;
-	margin: 12px;
+/* 	margin: 12px; */
 	min-width: 100px;
 	text-align: center;
 	font-weight: bold;
@@ -84,6 +84,10 @@ body {
 	font-weight: bold;
 }
 
+#post-button {
+	margin-top: 12px;
+}
+
 #add-post-input-container {
 	width: 400px;
 	left: calc(50% - 200px);
@@ -92,7 +96,7 @@ body {
 
 #add-post-input {
 	font-size: 22px;
-	width: calc(100% - 80px);
+	width: calc(100% - 82px);
 }
 
 #toast {
@@ -215,4 +219,15 @@ body {
 
 .message-info img.active:hover {
 	background-color: #8ac;
+}
+
+#color-button img {
+	height: 22px;
+	width: 22px;
+	position: relative;
+	top: 4px;	
+}
+
+#color-wheel {
+	margin-left: 90px;
 }

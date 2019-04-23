@@ -1,6 +1,9 @@
 //import { Template } from "meteor/templating";
 //import { ReactiveVar } from "meteor/reactive-var";
 
+// https://www.cssscript.com/sleek-html5-javascript-color-picker-iro-js/
+import iro from "@jaames/iro";
+
 const fadeDuration = 1200;
 const toastDuration = 4000;
 const flightTime = 12000;
@@ -10,13 +13,15 @@ const numMessages = 3;
 const isPostInProgress = new ReactiveVar(false);
 const isWallCreationInProgress = new ReactiveVar(false);
 const isDisplayEmojis = new ReactiveVar(false);
+const isDisplayColorPicker = new ReactiveVar(false);
 const toastText = new ReactiveVar();
 const wallIdCompletions = new ReactiveVar([]);
 const messages = new ReactiveVar({});
 const emojiFilter = new ReactiveVar();
 const pausedMessages = new ReactiveVar({});
 const updateUpvote = new ReactiveVar();
-
+var messageColor = null;
+const messageIntervalIds = [];
 
 Template.main.helpers({
 	emojis : function() {
@@ -65,6 +70,10 @@ Template.main.helpers({
 	wallIdCompletions : function() {
 		return wallIdCompletions.get();
 	},
+
+	isDisplayColorPicker : function() {
+		return isDisplayColorPicker.get();
+	},
 });
 
 Template.main.events({
@@ -104,6 +113,7 @@ Template.main.events({
 		$("#add-post-input-container").show("explode", {
 			pieces : 64
 		});
+		messageColor = null;
 	},
 
 	"click #post-button" : function(e) {
@@ -112,7 +122,7 @@ Template.main.events({
 			toast("message_too_short");
 		} else {
 			isPostInProgress.set(true);
-			Meteor.call("saveMessage", text, wallId.get(), function(err, result) {
+			Meteor.call("saveMessage", text, messageColor, wallId.get(), function(err, result) {
 				toast(err ? "post_fail" : "post_success");
 				$(".container").hide();
 				isPostInProgress.set(false);
@@ -130,6 +140,7 @@ Template.main.events({
 	},
 
 	"click #emoji-button" : function(e) {
+		isDisplayColorPicker.set(false);
 		isDisplayEmojis.set(!isDisplayEmojis.get());
 	},
 
@@ -182,6 +193,11 @@ Template.main.events({
 		$("#search-walls-input-container").show("explode", {
 			pieces : 64
 		});
+
+	// why fail???
+	//		Meteor.setTimeout(() => {
+	//			$("#wall-id-search-input").focus();
+	//		}, 1000);
 	},
 
 	"keyup #wall-id-search-input" : function(e) {
@@ -192,7 +208,35 @@ Template.main.events({
 
 	"click .search-walls-result" : function(e) {
 		$(".container").hide();
-		wallId.set(this);
+		$(".message").hide();
+
+		for (var id in messages.get()) {
+			$("#" + id).remove();
+		}
+		messages.set([]);
+		for (var id of messageIntervalIds) {
+			Meteor.clearTimeout(id); //
+		}
+
+		wallId.set(this.toString());
+	},
+
+	"click #color-button" : function(e) {
+		isDisplayEmojis.set(false);
+		isDisplayColorPicker.set(!isDisplayColorPicker.get());
+
+		if (isDisplayColorPicker.get()) {
+			Meteor.setTimeout(() => {
+				const colorWheel = iro.ColorPicker("#color-wheel", {
+					width : 200,
+				});
+
+				colorWheel.on("color:change", function(color, changes) {
+					// when the color has changed, the callback gets passed the color object and an object providing which color channels (out of H, S, V) have changed.
+					messageColor = color.rgb;
+				});
+			}, 0);
+		}
 	},
 });
 
@@ -297,11 +341,21 @@ Template.message.onRendered(function() {
 		left : init.x,
 		top : init.y
 	});
+	const time = flightTime + ((Math.random() - 0.5) * flightTimeVariation);
+	var t = 0;
+	const freq = 0.1 + (Math.random() * 0.1);
+	const intervalId = Meteor.setInterval(() => {
+		element.css("box-shadow", "0px 0px  8px " + (2 + ((Math.sin(t) + 1) * 8)) + "px rgba(100, 200, 255, 0.6)");
+		t += freq;
+	}, 40);
+	messageIntervalIds.push(intervalId);
 	element.animate({
 		left : final.x + "px",
 		top : final.y + "px"
-	}, flightTime + ((Math.random() - 0.5) * flightTimeVariation), null, function() {
+	}, time, null, function() {
 		element.remove();
+		Meteor.clearInterval(intervalId);
+		messageIntervalIds.splice(messageIntervalIds.indexOf(intervalId), 1);
 		const _messages = messages.get();
 		delete _messages[id];
 		messages.set(_messages);
