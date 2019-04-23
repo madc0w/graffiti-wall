@@ -233,16 +233,23 @@ Template.message.helpers({
 });
 
 Template.message.events({
-	"click .upvote-icon" : function(e) {
-		localStorage.setItem(this._id, true);
-		updateUpvote.set(new Date());
-		Meteor.call("upvote", this._id, function(err, result) {
-			if (err) {
-				toast("upvote_fail");
-			} else {
-				toast("upvote_success");
-			}
-		});
+	"click .upvote-icon.active" : function(e) {
+		const _this = this;
+		Meteor.setTimeout(() => {
+			$(e.target).hide("puff", null, 400, function() {
+				//				console.log("complete");
+				localStorage.setItem(_this._id, true);
+				updateUpvote.set(new Date());
+				$(e.target).show();
+				Meteor.call("upvote", _this._id, function(err, result) {
+					if (err) {
+						toast("upvote_fail");
+					} else {
+						toast("upvote_success");
+					}
+				});
+			});
+		}, 0);
 	},
 
 	"click .message" : function(e) {
