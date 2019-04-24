@@ -298,12 +298,13 @@ Template.message.events({
 
 	"click .message" : function(e) {
 		const _pausedMessages = pausedMessages.get();
-		if (_pausedMessages[e.target.id]) {
-			$(e.target).resume();
-			delete _pausedMessages[e.target.id];
+		const id = e.currentTarget.id;
+		if (_pausedMessages[id]) {
+			$(e.currentTarget).resume();
+			delete _pausedMessages[id];
 		} else {
-			$(e.target).pause();
-			_pausedMessages[e.target.id] = true;
+			$(e.currentTarget).pause();
+			_pausedMessages[id] = true;
 		}
 		pausedMessages.set(_pausedMessages);
 	},
